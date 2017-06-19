@@ -194,6 +194,8 @@ nbactions.xml
 # Duplicate of project file, see http://www.hs-owl.de/fb5/labor/it/de/if1/vl/IF1JavaOhneBluej.pdf, page 4
 bluej.pkh
 
+# Lab2 memes folder
+data/
+
 # Lab24 text file
 mystery.txt
-
