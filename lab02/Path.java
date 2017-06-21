@@ -31,7 +31,8 @@ public class Path {
 	}
 	
 	public Path(double x, double y){
-		
+		this.nextPoint=new Point(0,0);
+		this.currPoint=new Point(0,0);
 		this.nextPoint.setX(x);
 		this.nextPoint.setY(y);
 		
@@ -41,4 +42,3 @@ public class Path {
 		this.currPoint=nextPoint;
 		this.nextPoint=new Point(dx,dy);
 	}
-}
