@@ -16,7 +16,7 @@ public class Account {
 		this.parentAccount.balance = 0;
 	}
 
-	public Account(int bal1, int bal2) {
+	public Account(int bal1, Account bal2) {
 		this.balance = bal1;
 		parentAccount = null;
 	}
