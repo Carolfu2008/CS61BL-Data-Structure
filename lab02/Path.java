@@ -40,6 +40,6 @@ public class Path {
 	
 	public void iterate(double dx, double dy){
 		this.currPoint=nextPoint;
-		this.nextPoint=new Point(dx,dy);
+		this.nextPoint=new Point(dx+currPoint.getX(),dy+currPoint.getY());
 	}
 }
