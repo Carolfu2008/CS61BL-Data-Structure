@@ -60,7 +60,7 @@ public class Account {
 			System.out.println("Insufficient funds");
 			return false;
 		} else if (this.balance < amount && this.balance + this.parentAccount.balance >= amount) {
-			this.parentAccount.balance = amount - this.balance;
+			this.parentAccount.balance =this.parentAccount.balance- amount +this.balance;
 			this.balance = 0;
 			return true;
 		} else {
