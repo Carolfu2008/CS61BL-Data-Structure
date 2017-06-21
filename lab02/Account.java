@@ -13,7 +13,7 @@ public class Account {
 	/** Initialize an account with the given BALANCE. */
 	public Account(int balance) {
 		this.balance = balance;
-		this.parentAccount.balance = 0;
+		this.parentAccount= null;
 	}
 
 	public Account(int bal1, Account bal2) {
@@ -46,7 +46,7 @@ public class Account {
 		if (amount < 0) {
 			System.out.println("Cannot withdraw negative amount.");
 			return false;
-		} else if (this.balance < amount && this.balance + this.parentAccount.balance < amount) {
+		} else if (this.balance < amount && this.balance + this.parentAccount.balance < amount&&this.) {
 			System.out.println("Insufficient funds");
 			return false;
 		} else if (this.balance < amount && this.balance + this.parentAccount.balance < amount) {
