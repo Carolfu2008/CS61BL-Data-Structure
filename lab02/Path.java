@@ -42,3 +42,4 @@ public class Path {
 		this.currPoint=nextPoint;
 		this.nextPoint=new Point(dx,dy);
 	}
+}
