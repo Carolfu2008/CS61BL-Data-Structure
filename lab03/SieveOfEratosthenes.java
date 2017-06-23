@@ -9,16 +9,16 @@ public class SieveOfEratosthenes {
 
         boolean[] isNotPrime = new boolean[upperBound];
 
-        for (int i = 0; i <= upperBound; i++) {
+        for (int i = 2; i < upperBound; i++) {
             if (isNotPrime[i] == true) {
                 continue;
             } else {
-                for(int j=i;j<=upperBound;j=j+i)
+                for(int j=i+i;j<upperBound;j=j+i)
                     isNotPrime[j]=true;
             }
         }
 
-        for (int i = 2; i <= upperBound; i++) {
+        for (int i = 2; i < upperBound; i++) {
             if (!isNotPrime[i]) {
                 System.out.println(i + " is a prime number.");
             }
