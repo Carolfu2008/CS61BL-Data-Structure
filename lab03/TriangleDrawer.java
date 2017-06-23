@@ -7,7 +7,7 @@ public class TriangleDrawer {
         int SIZE=10;
         int col=0;
 
-        while(col<SIZE){
+        while(col<=SIZE){
             int row=0;
             while(row<col) {
                 System.out.print("*");
