@@ -1,10 +1,4 @@
 
-
-/**
- * This class represents a bank account whose current balance is a nonnegative
- * amount in US dollars.
- */
-
 public class Account {
 
 	private int balance;
@@ -26,7 +20,7 @@ public class Account {
 	public Account(int bal1, Account bal2) {
 		this.balance = bal1;
 		this.parentAccount = bal2;
-	}
+
 
 	/** Return the number of dollars in the account. */
 	public int getBalance() {
@@ -79,5 +73,4 @@ public class Account {
 		deposit(trans);
 	}
 
-	
-}
+
