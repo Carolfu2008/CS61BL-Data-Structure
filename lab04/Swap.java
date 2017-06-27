@@ -4,9 +4,14 @@ public class Swap {
     static int counter3 = 0; // static, is a class variable
 
     public int swap(int[] arr, int start_index) {
+<<<<<<< HEAD
         int counter =0;
         while (start_index < arr.length - 1) {
 
+=======
+        while (start_index < arr.length - 1) {
+            int counter = 0;
+>>>>>>> c66803e4fc7c000af5acb9e07efb4cd3a34cb7dc
             if (arr[start_index] > arr[start_index+1]) {
                 int temporary = arr[start_index];
                 arr[start_index] = arr[start_index+1];

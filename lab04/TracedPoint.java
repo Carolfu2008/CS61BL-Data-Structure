@@ -1,6 +1,7 @@
 import java.awt.*;
 public class TracedPoint extends Point {
 
+<<<<<<< HEAD
     int x;
     int y;
     public TracedPoint(int x, int y) {
@@ -17,6 +18,13 @@ public class TracedPoint extends Point {
         this.x=x;
         this.y=y;
     }
+=======
+    public TracedPoint(int x, int y) {
+        super(x, y);
+    }
+
+    // Your move method goes here.
+>>>>>>> c66803e4fc7c000af5acb9e07efb4cd3a34cb7dc
 
     public static void main (String[] args) {
         TracedPoint p1 = new TracedPoint(5, 6);
