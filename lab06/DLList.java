@@ -6,11 +6,18 @@ public class DLList {
         Object item;
         DLNode prev, next;
 
+        public DLNode(Object item) {
+            this.item = item;
+            this.prev = null;
+            this.next = null;
+        }
+
         public DLNode(Object item, DLNode prev, DLNode next) {
             this.item = item;
             this.prev = prev;
             this.next = next;
         }
+
     }
 
     /**
@@ -23,11 +30,19 @@ public class DLList {
     }
 
     /**
+     *
      * Insert into the end of this list
      * @param o Object to insert
      */
     public void insertBack(Object o) {
         DLNode n = new DLNode(o, sentinel.prev, sentinel);
+        n.next.prev = n;
+        n.prev.next = n;
+        size++;
+    }
+
+    public void insertAt(Object o,DLNode x) {
+        DLNode n = new DLNode(o, x, x.next);
         n.next.prev = n;
         n.prev.next = n;
         size++;
@@ -73,6 +88,18 @@ public class DLList {
      */
     public void insert(Object o, int position) {
         // fill me in
+        if (position==0)
+            insertFront(o);
+        else if (position>=size)
+            insertBack(o);
+        else {
+            DLNode p=sentinel;
+            while (position!=0){
+                p=p.next;
+                position--;
+            }
+            insertAt(o,p);
+        }
     }
 
     /**
@@ -81,6 +108,10 @@ public class DLList {
      */
     public void insertFront(Object o) {
         // fill me in
+        DLNode n = new DLNode(o, sentinel, sentinel.next);
+        n.next.prev = n;
+        n.prev.next = n;
+        size++;
     }
 
     /**
@@ -89,6 +120,16 @@ public class DLList {
      */
     public void remove(Object o) {
         // fill me in
+        DLNode pl=sentinel;
+        for(int i=0;i<=size;i++){
+            if(pl.next.item==o){
+                remove(pl.next);
+
+            }
+            else
+                pl=pl.next;
+        }
+
     }
 
     /**
@@ -98,6 +139,11 @@ public class DLList {
      */
     public void remove(DLNode n) {
         // fill me in
+        n.prev.next=n.next;
+        n.next.prev=n.prev;
+        n.prev=null;
+        n.next=null;
+        size--;
     }
 
 
@@ -106,6 +152,15 @@ public class DLList {
      */
     public void doubleInPlace() {
         // fill me in
+        if (size==0)
+            return;
+        DLNode pointer=sentinel.next;
+        int cnt =size;
+        while (cnt!=0){
+            insertAt(pointer.item,pointer);
+            pointer=pointer.next.next;
+            cnt--;
+        }
     }
 
     /**
@@ -113,9 +168,27 @@ public class DLList {
      */
     public void reverse() {
         // fill me in
+        DLNode po1=sentinel.next;
+        for (int i=0;i<size-1;i++){
+            DLNode tmp= po1.next;
+            remove(po1.next);
+            insertFront(tmp.item);
+        }
+
+    }
+
+    private static DLNode rev(DLNode ori, DLNode soFar) {
+        if (ori == null) {
+            return soFar;
+        } else {
+            DLNode temp = ori.next;
+            ori.next = soFar;
+            return rev( temp , ori );
+        }
     }
 
     public static void main(String[] args) {
         // you can add some quick tests here if you would like
+
     }
 }
