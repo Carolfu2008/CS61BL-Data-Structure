@@ -28,16 +28,26 @@ public class RuntimeQuiz {
         }
     }
 
+<<<<<<< HEAD
     public static Asymptotic f2_notation=Asymptotic.BIG_THETA;
     public static Runtime f2_runtime=Runtime.QUADRATIC;
+=======
+    public static Asymptotic f2_notation;
+    public static Runtime f2_runtime;
+>>>>>>> 3fafda19c771d903fff02a0a64c23309222acecd
     public int f2(int n) {
         if (n <= 1) return n;
         f1(new int[n]);
         return n + n * f2(n - 1) + n * n * f2(1);
     }
 
+<<<<<<< HEAD
     public static Asymptotic f3_notation=Asymptotic.BIG_THETA;
     public static Runtime f3_runtime=Runtime.LINEAR;
+=======
+    public static Asymptotic f3_notation;
+    public static Runtime f3_runtime;
+>>>>>>> 3fafda19c771d903fff02a0a64c23309222acecd
     /* When f3 is first called, start will be 0 and end will be the length of the array - 1 */
     public int f3(char[] array, int start, int end) {
         if (array.length <= 1 || end <= start) return 1;
@@ -45,8 +55,13 @@ public class RuntimeQuiz {
         return f3(array, start, mid) + f3(array, mid + 1, end);
     }
 
+<<<<<<< HEAD
     public static Asymptotic f4_notation=Asymptotic.BIG_THETA;
     public static Runtime f4_runtime=Runtime.LINEARITHMIC;
+=======
+    public static Asymptotic f4_notation;
+    public static Runtime f4_runtime;
+>>>>>>> 3fafda19c771d903fff02a0a64c23309222acecd
     /* When f4 is first called, start will be 0 and end will be the length of the array - 1 */
     public int f4(char[] array, int start, int end) {
         if (array.length <= 1 || end <= start) return 1;
@@ -58,8 +73,13 @@ public class RuntimeQuiz {
         return counter + f4(array, start, mid) + f4(array, mid + 1, end);
     }
 
+<<<<<<< HEAD
     public static Asymptotic f5_notation=Asymptotic.BIG_THETA;
     public static Runtime f5_runtime=Runtime.LOG_N;
+=======
+    public static Asymptotic f5_notation;
+    public static Runtime f5_runtime;
+>>>>>>> 3fafda19c771d903fff02a0a64c23309222acecd
     public void f5(int n) {
         int[] array = {1, 2, 3};
         while (n > 0) {
@@ -68,8 +88,13 @@ public class RuntimeQuiz {
         }
     }
 
+<<<<<<< HEAD
     public static Asymptotic f6_notation=Asymptotic.BIG_O;
     public static Runtime f6_runtime=Runtime.LINEAR;
+=======
+    public static Asymptotic f6_notation;
+    public static Runtime f6_runtime;
+>>>>>>> 3fafda19c771d903fff02a0a64c23309222acecd
     public void f6(int[] array) {
         for (int i = 1; i < array.length; i++) {
             if (array[i] == array[i-1]) {
@@ -79,10 +104,17 @@ public class RuntimeQuiz {
         }
     }
 
+<<<<<<< HEAD
     public static Asymptotic f7_notation=Asymptotic.BIG_O;
     public static Runtime f7_runtime=Runtime.EXPONENTIAL ;
     public static Asymptotic f7_omega_notation = Asymptotic.BIG_OMEGA;
     public static Runtime f7_omega_runtime=Runtime.LINEAR;
+=======
+    public static Asymptotic f7_notation;
+    public static Runtime f7_runtime ;
+    public static Asymptotic f7_omega_notation = Asymptotic.BIG_OMEGA;
+    public static Runtime f7_omega_runtime;
+>>>>>>> 3fafda19c771d903fff02a0a64c23309222acecd
     /* When f7 is first called, start will be 0 and end will be the length of the array - 1 */
     public int f7(int[] array, int start, int end) {
         if (array.length <= 1 || end <= start) {
@@ -101,6 +133,7 @@ public class RuntimeQuiz {
     /** Below, fill out the runtimes for the specified methods of your DLList **/
 
     /* insert(Object o, int position) */
+<<<<<<< HEAD
     public static Asymptotic insert_notation=Asymptotic.BIG_O;
     public static Runtime insert_runtime=Runtime.LINEAR;
 
@@ -123,5 +156,29 @@ public class RuntimeQuiz {
     /* reverse() */
     public static Asymptotic reverse_notation=Asymptotic.BIG_THETA;
     public static Runtime reverse_runtime=Runtime.LINEAR;
+=======
+    public static Asymptotic insert_notation;
+    public static Runtime insert_runtime;
+
+    /* insertBack(Object o) */
+    public static Asymptotic insert_back_notation;
+    public static Runtime insert_back_runtime;
+
+    /* get(int position) */
+    public static Asymptotic get_notation;
+    public static Runtime get_runtime;
+
+    /* remove(Object o) */
+    public static Asymptotic remove_object_notation;
+    public static Runtime remove_object_runtime;
+
+    /* remove(DLNode n) */
+    public static Asymptotic remove_node_notation;
+    public static Runtime remove_node_runtime;
+
+    /* reverse() */
+    public static Asymptotic reverse_notation;
+    public static Runtime reverse_runtime;
+>>>>>>> 3fafda19c771d903fff02a0a64c23309222acecd
 
 }
