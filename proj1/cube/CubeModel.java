@@ -15,11 +15,11 @@ import static java.lang.System.arraycopy;
  */
 public class CubeModel extends Observable {
 
-    private int side = 4;
+    private int locside = 4;
     private int currCol = 0;
     private int currRow = 0;
     private int moves = 0;
-    private boolean[][] painted = new boolean[side][side];
+    private boolean[][] pnted = new boolean[locside][locside];
     private boolean[] pface = new boolean[6];
 
 
@@ -27,7 +27,7 @@ public class CubeModel extends Observable {
      * A blank cube puzzle of size 4.
      */
     public CubeModel() {
-        this.side = 4;
+        this.locside = 4;
     }
 
     /**
@@ -49,10 +49,10 @@ public class CubeModel extends Observable {
      */
     public void initialize(int side, int row0, int col0, boolean[][] painted,
                            boolean[] facePainted) {
-        this.side = side;
+        this.locside = side;
         this.currRow = row0;
         this.currCol = col0;
-        this.painted = painted;
+        this.pnted = painted;
         this.pface = facePainted;
         setChanged();
         notifyObservers();
@@ -75,12 +75,12 @@ public class CubeModel extends Observable {
      * Initialize puzzle to be a copy of CUBE.
      */
     public void initialize(CubeModel cube) {
-        this.side = cube.side;
+        this.locside = cube.locside;
         this.pface = cube.pface;
         this.currCol = cube.currCol;
         this.currRow = cube.currRow;
         this.moves = cube.moves;
-        this.painted = cube.painted;
+        this.pnted = cube.pnted;
         setChanged();
         notifyObservers();
     }
@@ -91,12 +91,14 @@ public class CubeModel extends Observable {
      * Transfers colors as specified by the rules.
      * Throws IllegalArgumentException if preconditions are not met.
      */
+
     public void move(int row, int col) {
-        // FIXME
-        if (row >= side || row < 0 || col >= side || col < side)
+        if (row >= locside || row < 0 || col >= locside || col < locside) {
             throw new IllegalArgumentException("Wrong range");
-        if (abs(currRow - row) + abs(currCol - col) != 1)
+        }
+        if (abs(currRow - row) + abs(currCol - col) != 1) {
             throw new IllegalArgumentException("Wrong range");
+        }
         this.currCol = col;
         this.currRow = row;
         moves++;
@@ -108,7 +110,7 @@ public class CubeModel extends Observable {
      * Return the number of squares on a side.
      */
     public int side() {
-        return this.side; //
+        return this.locside; //
     }
 
     /**
@@ -116,10 +118,10 @@ public class CubeModel extends Observable {
      * Requires 0 <= ROW, COL < board size.
      */
     public boolean isPaintedSquare(int row, int col) {
-        if (row >= side || row < 0 || col >= side || col < 0) {
+        if (row >= locside || row < 0 || col >= locside || col < 0) {
             throw new IllegalArgumentException("Wrong range");
         }
-        if (painted[row][col]) {
+        if (pnted[row][col]) {
             return true;
         }
         return false;
