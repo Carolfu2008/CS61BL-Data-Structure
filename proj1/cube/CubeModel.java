@@ -12,6 +12,15 @@ import static java.lang.System.arraycopy;
  */
 public class CubeModel extends Observable {
 
+    private int side=4;
+    private int cudeCol;
+    private int cudeRow;
+    private int moves;
+    private boolean painted[][]=new boolean[side][side];
+    private boolean []pface=new boolean[6];
+
+
+
     /** A blank cube puzzle of size 4. */
     public CubeModel() {
         // FIXME
@@ -70,28 +79,38 @@ public class CubeModel extends Observable {
 
     /** Return the number of squares on a side. */
     public int side() {
-        return 0; // FIXME
+        return this.side; //
     }
 
     /** Return true iff square ROW, COL is painted.
      *  Requires 0 <= ROW, COL < board size. */
     public boolean isPaintedSquare(int row, int col) {
-        return true; // FIXME
+        if (row>=side ||row<0){
+            System.out.println("Wrong range of row");
+            return false;
+        }
+        if (col>=side||col<0){
+            System.out.println("Wrong range of column");
+            return false;
+        }
+        if (painted[row][col])
+            return true;
+        return false;
     }
 
     /** Return current row of cube. */
     public int cubeRow() {
-        return 0; // FIXME
+        return this.cudeRow;
     }
 
     /** Return current column of cube. */
     public int cubeCol() {
-        return 0; // FIXME
+        return this.cudeCol;
     }
 
     /** Return the number of moves made on current puzzle. */
     public int moves() {
-        return 0; // FIXME
+        return this.moves;
     }
 
     /** Return true iff face #FACE, 0 <= FACE < 6, of the cube is painted.
@@ -104,13 +123,24 @@ public class CubeModel extends Observable {
      *    5: Top face.
      */
     public boolean isPaintedFace(int face) {
-        return true; // FIXME
+        if (face<0||face>5){
+            System.out.println("Wrong range of face");
+            return false;
+        }
+        if (pface[face])
+            return true;
+        return false;
     }
 
     /** Return true iff all faces are painted. */
     public boolean allFacesPainted() {
-        return true; // FIXME
+        for (int i=0;i<6;i++){
+            if (!pface[i])
+                return false;
+        }
+        return true;
     }
+
 
     // ADDITIONAL FIELDS AND PRIVATE METHODS HERE, AS NEEDED.
 
