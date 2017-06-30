@@ -1,6 +1,6 @@
 public class Survey {
 
     public String getSecretWord() {
-        return "PUT SECRET WORD HERE!";
+        return "Big-O does not mean worst case";
     }
 }

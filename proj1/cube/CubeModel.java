@@ -93,7 +93,7 @@ public class CubeModel extends Observable {
      */
 
     public void move(int row, int col) {
-        if (row >= locside || row < 0 || col >= locside || col < locside) {
+        if (row >= locside || row < 0 || col >= locside || col < 0) {
             throw new IllegalArgumentException("Wrong range");
         }
         if (abs(currRow - row) + abs(currCol - col) != 1) {
