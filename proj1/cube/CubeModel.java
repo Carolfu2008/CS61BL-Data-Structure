@@ -27,7 +27,7 @@ public class CubeModel extends Observable {
      * A blank cube puzzle of size 4.
      */
     public CubeModel() {
-        this.side=4;
+        this.side = 4;
     }
 
     /**
@@ -49,11 +49,11 @@ public class CubeModel extends Observable {
      */
     public void initialize(int side, int row0, int col0, boolean[][] painted,
                            boolean[] facePainted) {
-        this.side=side;
-        this.currRow=row0;
-        this.currCol=col0;
-        this.painted=painted;
-        this.pface=facePainted;
+        this.side = side;
+        this.currRow = row0;
+        this.currCol = col0;
+        this.painted = painted;
+        this.pface = facePainted;
         setChanged();
         notifyObservers();
     }
@@ -75,12 +75,12 @@ public class CubeModel extends Observable {
      * Initialize puzzle to be a copy of CUBE.
      */
     public void initialize(CubeModel cube) {
-        this.side=cube.side;
-        this.pface=cube.pface;
-        this.currCol=cube.currCol;
-        this.currRow=cube.currRow;
-        this.moves=cube.moves;
-        this.painted=cube.painted;
+        this.side = cube.side;
+        this.pface = cube.pface;
+        this.currCol = cube.currCol;
+        this.currRow = cube.currRow;
+        this.moves = cube.moves;
+        this.painted = cube.painted;
         setChanged();
         notifyObservers();
     }
@@ -93,12 +93,12 @@ public class CubeModel extends Observable {
      */
     public void move(int row, int col) {
         // FIXME
-        if (row>=side||row<0||col>=side||col<side)
+        if (row >= side || row < 0 || col >= side || col < side)
             throw new IllegalArgumentException("Wrong range");
-        if (abs(currRow-row)+abs(currCol-col)!=1)
+        if (abs(currRow - row) + abs(currCol - col) != 1)
             throw new IllegalArgumentException("Wrong range");
-        this.currCol=col;
-        this.currRow=row;
+        this.currCol = col;
+        this.currRow = row;
         moves++;
         setChanged();
         notifyObservers();

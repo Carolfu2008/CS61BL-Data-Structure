@@ -4,16 +4,23 @@ import java.util.Observer;
 import java.util.Observable;
 import java.util.Random;
 
-/** Main class for the Cube puzzle.
- *  @author P. N. Hilfinger. */
+/**
+ * Main class for the Cube puzzle.
+ *
+ * @author P. N. Hilfinger.
+ */
 public class Main implements Observer {
 
-    /** Present cube puzzles, according to options given in ARGS. */
+    /**
+     * Present cube puzzles, according to options given in ARGS.
+     */
     public static void main(String... args) {
         new Main().run();
     }
 
-    /** Set up and monitor cube puzzles until exited. */
+    /**
+     * Set up and monitor cube puzzles until exited.
+     */
     private void run() {
         _model = new CubeModel();
         _board = new CubeGUI("Cube", _model);
@@ -23,8 +30,10 @@ public class Main implements Observer {
         _board.display(true);
     }
 
-    /** Initialize model to a random configuration on a grid with SIDE
-     *  rows. */
+    /**
+     * Initialize model to a random configuration on a grid with SIDE
+     * rows.
+     */
     private void initPuzzle() {
         // FIXME
         _done = false;
@@ -42,7 +51,7 @@ public class Main implements Observer {
                     if (_model.allFacesPainted()) {
                         _done = true;
                         _board.message("", "Finished in %d moves.%n",
-                                       _model.moves());
+                                _model.moves());
                     }
                 } catch (IllegalArgumentException excp) {
                     /* Ignore IllegalArgumentException */
@@ -66,15 +75,25 @@ public class Main implements Observer {
         }
     }
 
-    /** Current board size. */
+    /**
+     * Current board size.
+     */
     private int _side;
-    /** The current cube puzzle. */
+    /**
+     * The current cube puzzle.
+     */
     private CubeModel _model;
-    /** GUI displaying puzzles. */
+    /**
+     * GUI displaying puzzles.
+     */
     private CubeGUI _board;
-    /** True iff current puzzle is solved. */
+    /**
+     * True iff current puzzle is solved.
+     */
     private boolean _done;
-    /** PRNG for choosing initial positions. */
+    /**
+     * PRNG for choosing initial positions.
+     */
     private Random _random = new Random();
 
 }
