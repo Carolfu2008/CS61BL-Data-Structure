@@ -1,3 +1,5 @@
+package cube;
+
 import org.junit.Test;
 import org.junit.Rule;
 import org.junit.rules.Timeout;

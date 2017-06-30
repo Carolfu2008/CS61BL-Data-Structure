@@ -1,3 +1,4 @@
+package cube;
 
 import java.util.Observer;
 import java.util.Observable;
