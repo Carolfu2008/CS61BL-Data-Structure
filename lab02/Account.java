@@ -20,6 +20,7 @@ public class Account {
 	public Account(int bal1, Account bal2) {
 		this.balance = bal1;
 		this.parentAccount = bal2;
+	}
 
 
 	/** Return the number of dollars in the account. */
@@ -72,5 +73,5 @@ public class Account {
 		other.withdraw(trans);
 		deposit(trans);
 	}
-
+}
 

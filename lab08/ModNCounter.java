@@ -1,9 +1,15 @@
-public class Counter {
+public class ModNCounter {
 
 	private int myCount;
+	private int mod;
 
-	public Counter() {
+	public ModNCounter() {
 		myCount = 0;
+	}
+
+	public ModNCounter(int n){
+		myCount = 0;
+		mod =n;
 	}
 
 	public void increment() {
@@ -18,4 +24,7 @@ public class Counter {
 		return myCount;
 	}
 
+	public int mod(){
+		return mod;
+	}
 }
