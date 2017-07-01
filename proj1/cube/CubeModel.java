@@ -4,7 +4,7 @@ import java.util.Observable;
 
 import static java.lang.Math.abs;
 
-// import static java.lang.System.arraycopy;
+//import static java.lang.System.arraycopy;
 
 /**
  * Models an instance of the Cube puzzle: a cube with color on some sides
@@ -85,11 +85,17 @@ public class CubeModel extends Observable {
      */
     public void initialize(CubeModel cube) {
         this.locside = cube.locside;
-        this.pface = cube.pface;
         this.currCol = cube.currCol;
         this.currRow = cube.currRow;
         this.moves = cube.moves;
-        this.pnted = cube.pnted;
+        boolean[][] p = new boolean[cube.side()][cube.side()];
+        for (int i = 0; i < cube.side(); i++) {
+            System.arraycopy(cube.pnted[i], 0, p[i], 0, cube.pnted[i].length);
+        }
+        this.pnted = p;
+        boolean[] f = new boolean[6];
+        System.arraycopy(cube.pface, 0, f, 0, cube.pface.length);
+        this.pface = f;
         setChanged();
         notifyObservers();
     }
