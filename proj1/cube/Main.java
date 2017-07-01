@@ -36,6 +36,18 @@ public class Main implements Observer {
      */
     private void initPuzzle() {
         // FIXME
+        Random rd = new Random();
+        boolean dice[]=new boolean[6];
+        for(int i=0;i<6;i++){
+            dice[i]=rd.nextBoolean();
+        }
+        boolean chess[][]=new boolean[_side][_side];
+        for (int i=0;i<_side;i++){
+            for(int j=0;j<_side;j++)
+                chess[i][j]=rd.nextBoolean();
+        }
+        CubeModel a=new CubeModel(_side,chess,dice);
+        _model=a;
         _done = false;
     }
 

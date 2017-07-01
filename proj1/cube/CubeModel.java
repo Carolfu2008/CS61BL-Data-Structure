@@ -3,7 +3,7 @@ package cube;
 import java.util.Observable;
 
 import static java.lang.Math.abs;
-import static java.lang.System.arraycopy;
+// import static java.lang.System.arraycopy;
 
 /**
  * Models an instance of the Cube puzzle: a cube with color on some sides
@@ -35,6 +35,14 @@ public class CubeModel extends Observable {
      */
     public CubeModel(CubeModel cube) {
         initialize(cube);
+    }
+
+    public CubeModel(int side, boolean[][] painted, boolean[] facePainted) {
+        this.locside = side;
+        this.currRow = 0;
+        this.currCol = 0;
+        this.pnted = painted;
+        this.pface = facePainted;
     }
 
     /**
@@ -99,8 +107,38 @@ public class CubeModel extends Observable {
         if (abs(currRow - row) + abs(currCol - col) != 1) {
             throw new IllegalArgumentException("Wrong range");
         }
+        if (currRow == row && currCol - col == -1) {
+            boolean tmp = pface[2];
+            pface[2] = pface[4];
+            pface[4] = pface[3];
+            pface[3] = pface[5];
+            pface[5] = tmp;
+        } else if (currRow == row && col - currCol == -1) {
+            boolean tmp = pface[2];
+            pface[2] = pface[5];
+            pface[5] = pface[3];
+            pface[3] = pface[4];
+            pface[4] = tmp;
+        } else if (currRow - row == 1 && col == currCol) {
+            boolean tmp = pface[5];
+            pface[5] = pface[1];
+            pface[1] = pface[4];
+            pface[4] = pface[0];
+            pface[0] = tmp;
+        } else if (row - currRow == 1 && col == currCol) {
+            boolean tmp = pface[5];
+            pface[5] = pface[0];
+            pface[0] = pface[4];
+            pface[4] = pface[1];
+            pface[1] = tmp;
+        }
         this.currCol = col;
         this.currRow = row;
+        if (pface[4] != pnted[currRow][currCol]) {
+            boolean tmp = pface[4];
+            pface[4] = pnted[currRow][currCol];
+            pnted[currRow][currCol] = tmp;
+        }
         moves++;
         setChanged();
         notifyObservers();
