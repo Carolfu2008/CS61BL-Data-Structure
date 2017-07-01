@@ -1,5 +1,7 @@
 import org.junit.*;
 
+import java.util.InputMismatchException;
+
 import static org.junit.Assert.*;
 
 /**
@@ -16,8 +18,19 @@ public class TimeTest {
                 null, null, null, null, null, null, null, null,
                 new Time (3, 30), new Time (11, 55)};
         for (int k = 0; k < timeArgs.length; k++) {
-            Time t = new Time(timeArgs[k]);
-            assertEquals(correctTimes[k], t);
+            try {
+                Time t = new Time(timeArgs[k]);
+                assertEquals(correctTimes[k], t);
+            } catch (NullPointerException e){
+                System.out.println("Null is illegal");
+            } catch (NumberFormatException e){
+                System.out.println("Format is illegal");
+            } catch (IndexOutOfBoundsException e){
+                System.out.println("Length is illegal");
+            } catch (IllegalArgumentException e){
+                System.out.println("Argument is illegal");
+            }
+
         }
     }
 }

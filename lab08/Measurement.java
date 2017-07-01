@@ -64,7 +64,11 @@ public class Measurement {
 	public Measurement minus(Measurement m2) {
 		this.feet=this.feet-m2.feet;
 		this.inches=this.inches-m2.inches;
-		return this; // provided to allow the file to compile
+		if(this.inches<0){
+			this.inches=this.inches+12;
+			this.feet=this.feet-1;
+		}
+		return new Measurement(this.feet,this.inches); // provided to allow the file to compile
 	}
 
 	/**
