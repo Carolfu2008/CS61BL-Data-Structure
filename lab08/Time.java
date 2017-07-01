@@ -4,9 +4,18 @@ public class Time {
     private int myMinutes;
     
     public Time (String s) {
-        int colonPos = s.indexOf (":");
-        myHours = Integer.parseInt (s.substring (0, colonPos));
-        myMinutes = Integer.parseInt (s.substring (colonPos+1));
+        if (s==null){
+            throw new IllegalArgumentException("Null is illegal");
+        }else {
+            int colonPos = s.indexOf(":");
+            myHours = Integer.parseInt(s.substring(0, colonPos));
+            myMinutes = Integer.parseInt(s.substring(colonPos + 1));
+            if (myHours < 0 || myHours > 23) {
+                throw new IllegalArgumentException("Hours should between 0 and 23");
+            } else if (myMinutes < 0 || myMinutes > 23) {
+                throw new IllegalArgumentException("Minutes should between 0 and 23");
+            }
+        }
     }
     
     public Time (int hours, int minutes) {

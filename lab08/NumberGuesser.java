@@ -21,7 +21,7 @@ public class NumberGuesser {
             if (answer.equals ("y")) {
                 high = guess;               // #4
             } else {
-                low = guess;                // #5
+                low = guess+1;                // #5
             }
             previousGuesses.add (guess);    // #6
             guess = (low+high)/2;           // #7

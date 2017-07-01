@@ -4,19 +4,19 @@ public class TestExceptions {
 		//________________ ;
 
 		try {
-			//________________ ;
+			//got null pointer ;
 
 		} catch (NullPointerException e) {
 			System.out.println ("got null pointer");
 		}
 		try {
-			//________________ ;
+			//got illegal array store ;
 
 		} catch (ArrayStoreException e) {
 			System.out.println ("got illegal array store");
 		}
 		try {
-			//________________ ;
+			//got illegal class cast ;
 
 		} catch (ClassCastException e) {
 			System.out.println ("got illegal class cast");
