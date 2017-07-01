@@ -35,26 +35,22 @@ public class Main implements Observer {
      * rows.
      */
     private void initPuzzle() {
-        Random rd = new Random();
-        boolean[] dice = new boolean[6];
-        for (int i = 0; i < 6; i++) {
-            dice[i] = rd.nextBoolean();
-        }
-        boolean[][] chess = new boolean[_side][_side];
         int cnt = 0;
-        for (int i = 0; i < _side; i++) {
-            for (int j = 0; j < _side; j++) {
-                if (cnt == 6) {
-                    continue;
-                }
-                chess[i][j] = rd.nextBoolean();
-                if (chess[i][j] = true) {
-                    cnt += 1;
+        boolean[][] a = new boolean[_side][_side];
+        while (cnt != 6) {
+            for (int i = 0; i < _side; i++) {
+                for (int j = 0; j < _side; j++) {
+                    if (cnt == 6 || a[i][j]) {
+                        continue;
+                    }
+                    a[i][j] = _random.nextBoolean();
+                    if (a[i][j]) {
+                        cnt += 1;
+                    }
                 }
             }
         }
-        CubeModel a = new CubeModel(_side, chess, dice);
-        _model = a;
+        _model.initialize(_side, 0, 0, a, new boolean[6]);
         _done = false;
     }
 
