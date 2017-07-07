@@ -11,6 +11,8 @@ public abstract class Date {
         this.year = year;
     }
 
+    public abstract Date nextDate();
+
     public int dayOfMonth() {
         return dayOfMonth;
     }

@@ -1,67 +1,113 @@
 public class FixedSizeList implements SimpleList {
 
-    /** List of elements. */
+    /**
+     * List of elements.
+     */
     protected int[] values;
-    /** Number of array cells used by the list. */
+    /**
+     * Number of array cells used by the list.
+     */
     int count;
 
-    /** Initializes a FixedSizeList with specified capacity. The capacity is the
-     *  the actual size of the array (i.e. the max number of items it can hold).
+    /**
+     * Initializes a FixedSizeList with specified capacity. The capacity is the
+     * the actual size of the array (i.e. the max number of items it can hold).
      */
     public FixedSizeList(int capacity) {
-        // YOUR CODE HERE
+        this.values = new int[capacity];
+        this.count = 0;
     }
 
-    /** Returns the number of items in the list. */
+    /**
+     * Returns the number of items in the list.
+     */
     public int size() {
-        // YOUR CODE HERE
+        return count;
     }
 
-    /** Returns true if the list is empty, else false. */
+    /**
+     * Returns true if the list is empty, else false.
+     */
     public boolean isEmpty() {
-        // YOUR CODE HERE
+        return (count == 0);
     }
 
-    /** Adds the int k to the list by placing it in the first unused spot in
-     *  values.
+    /**
+     * Adds the int k to the list by placing it in the first unused spot in
+     * values.
      */
     public void add(int k) {
-        // YOUR CODE HERE
+        if (count == values.length) {
+            throw new ListException("Full!");
+        } else {
+            values[count] = k;
+            count++;
+        }
     }
 
-    /** Removes k from the list if it is present. If k appears multiple times,
-     *  it only removes the first occurence of k.
+    /**
+     * Removes k from the list if it is present. If k appears multiple times,
+     * it only removes the first occurence of k.
      */
     public void remove(int k) {
-        // YOUR CODE HERE
+        int cnt = -1;
+        for (int i = 0; i < count; i++) {
+            if (values[i] == k) {
+                cnt = i;
+                break;
+            }
+        }
+        if (cnt != -1) {
+            removeIndex(cnt);
+        } else {
+            return;
+        }
     }
 
-    /** Returns if the collection contains k. */
+    /**
+     * Returns if the collection contains k.
+     */
     public boolean contains(int k) {
-        // YOUR CODE HERE
+        for (int i = 0; i < count; i++) {
+            if (values[i] == k) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    /** Returns the integer stored at the i-th index in the list. */
+    /**
+     * Returns the integer stored at the i-th index in the list.
+     */
     public int get(int i) {
-        // YOUR CODE HERE
+        if (i >= count) {
+            throw new ListException("Illegal input!");
+        } else {
+            return values[i];
+        }
     }
 
-    /** Inserts k into the list at position i by shifting each element at index
-     *  i and onwards one entry to the right.
-     *  Precondition: i is between 0 and count, inclusive.
+    /**
+     * Inserts k into the list at position i by shifting each element at index
+     * i and onwards one entry to the right.
+     * Precondition: i is between 0 and count, inclusive.
      */
     public void add(int i, int k) {
-        for (int j = i + 1; j <= count; j++) {
-            values[j] = values[j-1];
+        for (int j = count; j >= i + 1; j--) {
+            values[j] = values[j - 1];
         }
         values[i] = k;
         count++;
     }
 
-    /** Removes the entry at position i by shifting each element after position
-     *  i one entry to the left.
+    /**
+     * Removes the entry at position i by shifting each element after position
+     * i one entry to the left.
      */
     public void removeIndex(int i) {
-        // YOUR CODE HERE
+        for (int j = i; j < count; j++) {
+            values[j] = values[j + 1];
+        }
+        count--;
     }
 }
