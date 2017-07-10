@@ -1,6 +1,33 @@
-public class DLList<T> {
+import java.util.Iterator;
+
+public class DLList<T> implements Iterable<T>{
+
     DLNode sentinel;
     int size;
+
+    @Override
+    public Iterator<T> iterator() {
+        return new itr();
+    }
+
+    public class itr implements Iterator<T> {
+        DLNode tmp = sentinel;
+
+        @Override
+        public boolean hasNext() {
+            if (tmp.next == sentinel) {
+                return false;
+            }
+            return true;
+        }
+
+        @Override
+        public T next() {
+            tmp = tmp.next;
+            return tmp.item;
+        }
+    }
+
 
     public class DLNode {
         T item;
@@ -52,6 +79,18 @@ public class DLList<T> {
         size++;
     }
 
+    public DLList<T> EvenIterator(DLList<T> a){
+        Iterator<T> evenIter = a.iterator();
+        DLList<T> q=new DLList<>();
+        int cnt =0;
+        while (evenIter.hasNext()){
+            T x= evenIter.next();
+            cnt++;
+            if (cnt%2==0)
+                q.insertBack(x);
+        }
+        return q;
+    }
 
     /**
      * Get the value at position pos. If the position does not exist, return null (the item of
