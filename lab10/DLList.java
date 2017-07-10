@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import java.util.Iterator;
 
 public class DLList<T> implements Iterable<T>{
@@ -35,17 +34,6 @@ public class DLList<T> implements Iterable<T>{
         DLNode prev, next;
 
         public DLNode(T item, DLNode prev, DLNode next) {
-=======
-public class DLList {
-    DLNode sentinel;
-    int size;
-
-    public class DLNode {
-        Object item;
-        DLNode prev, next;
-
-        public DLNode(Object item, DLNode prev, DLNode next) {
->>>>>>> 9e92597fba06a07d2c16cda60bf07cb3963b985c
             this.item = item;
             this.prev = prev;
             this.next = next;
@@ -84,32 +72,13 @@ public class DLList {
      * Insert into the end of this list
      * @param o Object to insert
      */
-<<<<<<< HEAD
     public void insertBack(T o) {
-=======
-    public void insertBack(Object o) {
->>>>>>> 9e92597fba06a07d2c16cda60bf07cb3963b985c
         DLNode n = new DLNode(o, sentinel.prev, sentinel);
         n.next.prev = n;
         n.prev.next = n;
         size++;
     }
 
-<<<<<<< HEAD
-    public DLList<T> EvenIterator(DLList<T> a){
-        Iterator<T> evenIter = a.iterator();
-        DLList<T> q=new DLList<>();
-        int cnt =0;
-        while (evenIter.hasNext()){
-            T x= evenIter.next();
-            cnt++;
-            if (cnt%2==0)
-                q.insertBack(x);
-        }
-        return q;
-    }
-=======
->>>>>>> 9e92597fba06a07d2c16cda60bf07cb3963b985c
 
     /**
      * Get the value at position pos. If the position does not exist, return null (the item of
@@ -117,21 +86,13 @@ public class DLList {
      * @param position to get from
      * @return the Object at the position in the list.
      */
-<<<<<<< HEAD
     public T get(int position) {
-=======
-    public Object get(int position) {
->>>>>>> 9e92597fba06a07d2c16cda60bf07cb3963b985c
         DLNode curr = sentinel.next;
         while (position > 0 && curr != sentinel) {
             curr = curr.next;
             position--;
         }
-<<<<<<< HEAD
         return  curr.item;
-=======
-        return curr.item;
->>>>>>> 9e92597fba06a07d2c16cda60bf07cb3963b985c
     }
 
     @Override
@@ -154,11 +115,7 @@ public class DLList {
      * @param position position to insert into. If position exceeds the size of the list, insert into
      *            the end of the list.
      */
-<<<<<<< HEAD
     public void insert(T o, int position) {
-=======
-    public void insert(Object o, int position) {
->>>>>>> 9e92597fba06a07d2c16cda60bf07cb3963b985c
         DLNode curr = sentinel;
         while (position > 0 && curr.next != sentinel) {
             curr = curr.next;
@@ -174,11 +131,7 @@ public class DLList {
      * Insert into the front of this list. You should can do this with a single call to insert().
      * @param o Object to insert
      */
-<<<<<<< HEAD
     public void insertFront(T o) {
-=======
-    public void insertFront(Object o) {
->>>>>>> 9e92597fba06a07d2c16cda60bf07cb3963b985c
         insert(o, 0);
     }
 
@@ -186,11 +139,7 @@ public class DLList {
      * Remove all copies of Object o in this list
      * @param o Object to remove
      */
-<<<<<<< HEAD
     public void remove(T o) {
-=======
-    public void remove(Object o) {
->>>>>>> 9e92597fba06a07d2c16cda60bf07cb3963b985c
         DLNode curr = sentinel.next;
         while (curr != sentinel) {
             if (curr.item.equals(o)) {
@@ -241,7 +190,6 @@ public class DLList {
     }
 
     public static void main(String[] args) {
-<<<<<<< HEAD
 //        DLList <String>l = new DLList();
 //        l.insertBack("CS");
 //        l.insertBack(61);
@@ -263,23 +211,5 @@ public class DLList {
         l.insertFront("Me");
         l.insertBack("ow~!");
         System.out.println(l.get(0) + l.get(1));
-=======
-        DLList l = new DLList();
-        l.insertBack("CS");
-        l.insertBack(61);
-        l.insertBack("BL!");
-        System.out.println("l = " + l);
-
-        l.insertBack(2);
-        l.insertFront(1);
-        System.out.println("l.get(0) = " + l.get(0));
-        l.insert(4, 1);
-        l.remove(1);
-        System.out.println("l = " + l);
-        l.doubleInPlace();
-        System.out.println("l = " + l);
-        l.reverse();
-        System.out.println("l = " + l);
->>>>>>> 9e92597fba06a07d2c16cda60bf07cb3963b985c
     }
 }
