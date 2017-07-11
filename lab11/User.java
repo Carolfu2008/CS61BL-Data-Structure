@@ -1,9 +1,13 @@
 import java.util.Arrays;
 
-public class User {
-    /** Global counter tracking the next available id **/
+public class User implements Comparable {
+    /**
+     * Global counter tracking the next available id
+     **/
     private static int nextId = 1;
-    /** Identifier marking that this is the id-th user created **/
+    /**
+     * Identifier marking that this is the id-th user created
+     **/
     private int id;
     /**
      * For this assignment, age is just an automatically assigned field
@@ -20,7 +24,9 @@ public class User {
         setAge();
     }
 
-    /** Force assign an id to a created user **/
+    /**
+     * Force assign an id to a created user
+     **/
     public User(int id, String username, String email) {
         this.id = id;
         this.username = username;
@@ -67,13 +73,30 @@ public class User {
 
     @Override
     public boolean equals(Object o) {
-        return false; // FIX ME
+        if (!(o instanceof User))
+            return false;
+        if (((User) o).getId() == this.getId() && ((User) o).getEmail().equals(this.getEmail())
+                &&((User) o).getUsername().equals(this.getUsername()))
+            return true;
+        return false;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        if (id != ((User)o).id)
+            return id - ((User)o).id;
+        return username.compareTo(((User)o).username);
     }
 
     public static void main(String[] args) {
-        User[] users = {new User(2, "christine", ""), new User(4, "antares", ""), new User(5, "ching", ""),
-                new User(1, "daniel", ""), new User(1, "dan", "")};
+        User[] users = {new User(2, "christine", ""),
+                new User(4, "antares", ""),
+                new User(5, "ching", ""),
+                new User(1, "daniel", ""),
+                new User(1, "dan", "")};
         Arrays.sort(users);
         System.out.println(Arrays.toString(users));
     }
+
+
 }

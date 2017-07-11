@@ -49,26 +49,32 @@ public class DBTable<T> {
     /**
      * getOrderedBy should create a new list ordered on the results of the getter,
      * without modifying the entries.
+     *
      * @param getter Gets a field from or processes an object of type T, and returns
      *               a Comparable.
-     * @param <R> The type returned by the getter method, and the type ordered on.
+     * @param <R>    The type returned by the getter method, and the type ordered on.
      * @return A List of the contents of this table, ordered by the result of the getter.
      */
     public <R extends Comparable<R>> List<T> getOrderedBy(Function<T, R> getter) {
-        return null; // FIX ME
+        List<T> newlist = getEntries();
+        Collections.sort(newlist, (o1, o2) -> (getter.apply(o1)).compareTo(getter.apply(o2)));
+        return newlist;
     }
 
     /**
      * groupByWhitelist() takes in a getter and a whitelist, and groups entries by the key given by
      * the getter as long as the key is present in the whitelist.
-     * @param getter Gets a field from or process an object of type T.
+     *
+     * @param getter    Gets a field from or process an object of type T.
      * @param whitelist A Collection of keys.
-     * @param <R> The key type and return type of the getter.
+     * @param <R>       The key type and return type of the getter.
      * @return A map from each key allowed to a list of the matching entries.
      * All keys present in this DB as obtained by the getter and in the whitelist are allowed.
      */
     public <R> Map<R, List<T>> groupByWhitelist(Function<T, R> getter, Collection<R> whitelist) {
-        return null; // FIX ME
+        return getEntries().stream()
+                .filter(a -> whitelist.contains(getter.apply(a)))
+                .collect(Collectors.groupingBy(getter));
     }
 
     /**
@@ -77,11 +83,24 @@ public class DBTable<T> {
      * DBTable<String> names = table.getSubtableOf(User::getUsername);
      */
     public <R> DBTable<R> getSubtableOf(Function<T, R> getter) {
-        return null; // FIX ME
+        return new DBTable<R>(getEntries().stream()
+                .map(a -> getter.apply(a))
+                .collect(Collectors.toList()));
     }
 
     public static void main(String[] args) {
         /* Basic test DB */
+
+//        DBTable<User> t1 = new DBTable<>(Arrays.asList(
+//                new User(2, "christine", ""),
+//                new User(4, "antares", ""),
+//                new User(1, "dan", ""),
+//                new User(1, "daniel", ""),
+//                new User(5, "ching", "")
+//        ));
+//        List<User> l = t1.getOrderedBy(User::getUsername);
+//        System.out.println(l);
+
         DBTable<User> t = new DBTable<>(Arrays.asList(
                 new User(2, "daniel", "dando@gmail.com"),
                 new User(3, "matt", "italy@gmail.com"),
@@ -89,5 +108,6 @@ public class DBTable<T> {
                 new User(1, "alanyao", "potato@cs61bl.org")
         ));
         System.out.println("t = " + t.groupByWhitelist(User::getId, Arrays.asList(1, 2)));
+
     }
 }
