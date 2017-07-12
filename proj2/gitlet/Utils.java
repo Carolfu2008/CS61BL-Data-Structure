@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -102,6 +103,22 @@ class Utils {
         } catch (IOException excp) {
             throw new IllegalArgumentException(excp.getMessage());
         }
+    }
+
+    /* OTHER FILE UTILITIES */
+
+    /** Return the concatentation of FIRST and OTHERS into a File designator,
+     *  analogous to the {@link java.nio.file.Paths.#get(String, String[])}
+     *  method. */
+    static File join(String first, String... others) {
+        return Paths.get(first, others).toFile();
+    }
+
+    /** Return the concatentation of FIRST and OTHERS into a File designator,
+     *  analogous to the {@link java.nio.file.Paths.#get(String, String[])}
+     *  method. */
+    static File join(File first, String... others) {
+        return Paths.get(first.getPath(), others).toFile();
     }
 
     /* DIRECTORIES */
