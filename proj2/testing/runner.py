@@ -435,6 +435,7 @@ if __name__ == "__main__":
     compile_target = join(gitlet_dir, "*.java")
     msg, output = doCompile(compile_target)
     if output.find("error") >= 0:
+        print(output)
         print("Your program failed to compile. Ran 0 tests.")
         sys.exit(1)
 
