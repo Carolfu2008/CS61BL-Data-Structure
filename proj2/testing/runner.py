@@ -58,7 +58,7 @@ The instructions each have one of the following forms:
           Run gitlet.Main with COMMAND ARGUMENTS as its parameters.  Compare
           its output with LINE1, LINE2, etc., reporting an error if there is
           "sufficient" discrepency.  The <<< delimiter may be followed by
-          an asterisk (*), which case, the preceding lines are treated as 
+          an asterisk (*), which case, the preceding lines are treated as
           Python regular expressions and matched accordingly.
    = NAME F
           Check that the file named NAME is identical to src/F, and report an
@@ -223,7 +223,7 @@ def reportDetails(test, included_files, line_num):
         print("   Limit on error details exceeded.")
         return
     direct = dirname(test)
-    
+
     print("    Error on line {} of {}".format(line_num, basename(test)))
 
     for base in [basename(test)] + included_files:
@@ -417,11 +417,18 @@ if __name__ == "__main__":
         print(DIRECTORY_LAYOUT_ERROR.format("gitlet"))
         sys.exit(1)
 
+    lib_glob = join(lib_dir, "*")
     ON_WINDOWS = Match(r'.*\\', join('a', 'b'))
     if ON_WINDOWS:
-        environ['CLASSPATH'] = "{};{};{}".format(abspath(getcwd()), lib_dir, environ['CLASSPATH'])
+        if ('CLASSPATH' in environ):
+            environ['CLASSPATH'] = "{};{};{}".format(abspath(getcwd()), lib_glob, environ['CLASSPATH'])
+        else:
+            environ['CLASSPATH'] = "{};{}".format(abspath(getcwd()), lib_glob)
     else:
-        environ['CLASSPATH'] = "{}:{}:{}".format(abspath(getcwd()), lib_dir, environ['CLASSPATH'])
+        if ('CLASSPATH' in environ):
+            environ['CLASSPATH'] = "{}:{}:{}".format(abspath(getcwd()), lib_glob, environ['CLASSPATH'])
+        else:
+            environ['CLASSPATH'] = "{}:{}".format(abspath(getcwd()), lib_glob)
         GITLET_COMMAND = 'exec ' + GITLET_COMMAND
         JAVAC_COMMAND = 'exec ' + JAVAC_COMMAND
 

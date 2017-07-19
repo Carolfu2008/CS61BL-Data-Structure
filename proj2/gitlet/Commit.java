@@ -1,40 +1,65 @@
 package gitlet;
 
-import sun.java2d.pipe.SpanShapeRenderer;
-
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
  * Created by lifesaver on 16/07/2017.
  */
-public class Commit {
-
-    private int id;
+public class Commit implements Serializable {
+    private String shaCode;
     private String description;
     private String timeStamp;
-    private Commit former;
-    public HashMap<String, String> fileID;
+    private String former;
+    public Map<String, String> fileID;
 
-    public Commit(int initID, String initDate,String initDes) {
-        this.id = initID;
+    public Commit(String initDes) {
         this.description = initDes;
-        this.timeStamp = initDate;
+        this.timeStamp = curTime();
+        this.fileID = null;
+        this.former = null;
+        this.shaCode = Utils.sha1(description, timeStamp);
     }
 
-    public Commit(int regID, String regDes, String regDate, Commit regFormer, HashMap<String, String> regFile) {
-        this.id = regID;
+    public Commit(String regDes, Blob[] tracked) {
         this.description = regDes;
-        this.timeStamp = regDate;
-        this.former = regFormer;
-        this.fileID=regFile;
+        this.timeStamp = curTime();
+        this.former = GitMethod.HEAD;
+        this.fileID = adding(tracked);
+        this.shaCode = Utils.sha1(description, former, strChanging(), timeStamp);
+        GitMethod.HEAD=shaCode;
     }
 
+    public String[] strChanging(){
+        String [] strlst=new String[fileID.size()*2];
+        Iterator<String> iter = this.fileID.keySet().iterator();
+        int cnt=0;
+        while (iter.hasNext()) {
+            strlst[cnt] = iter.next();
+            strlst[cnt+1] = fileID.get(strlst[cnt]);
+            cnt+=2;
+        }
+        return strlst;
+    }
 
-    public int getId() {
-        return id;
+    public String curTime() {
+        Date date = new Date();
+        SimpleDateFormat t = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return t.format(date);
+    }
+
+    public Map adding(Blob[] tracked) {
+        for (int i = 0; i < tracked.length; i++) {
+            fileID.put(tracked[i].getFileName(), tracked[i].getShaCode());
+        }
+        return fileID;
+    }
+
+    public String getShaCode() {
+        return shaCode;
     }
 
     public String getDescription() {
@@ -45,11 +70,19 @@ public class Commit {
         return timeStamp;
     }
 
-    public Commit getFormer() {
+    public String getFormer() {
         return former;
     }
 
-    public HashMap<String, String> getFileID() {
+    public Map<String, String> getFileID() {
         return fileID;
+    }
+
+    public void printLog(Commit commit) {
+        System.out.println("===");
+        System.out.println("Commit " + commit.shaCode);
+        System.out.println(timeStamp);
+        System.out.println(description);
+        System.out.println();
     }
 }
