@@ -35,19 +35,19 @@ public class FibonacciTest extends TestCase {
 		fib = new Fibonacci(1);
 		assertTrue(fib.callsToFib == 1);
 		fib = new Fibonacci(2);
-		assertTrue(fib.callsToFib == 3);
+		assertTrue(fib.callsToFib <= 3);
 		fib = new Fibonacci(3);
-		assertTrue(fib.callsToFib == 5);
+		assertTrue(fib.callsToFib <= 5);
 		fib = new Fibonacci(4);
-		assertTrue(fib.callsToFib == 7);
+		assertTrue(fib.callsToFib <= 7);
 		fib = new Fibonacci(5);
-		assertTrue(fib.callsToFib == 9);
+		assertTrue(fib.callsToFib <= 9);
 		fib = new Fibonacci(6);
-		assertTrue(fib.callsToFib == 11);
+		assertTrue(fib.callsToFib <= 11);
 		fib = new Fibonacci(7);
-		assertTrue(fib.callsToFib == 13);
+		assertTrue(fib.callsToFib <= 13);
 		fib = new Fibonacci(1000);
-		assertTrue(fib.callsToFib == 1999);
+		assertTrue(fib.callsToFib <= 1999);
 	}
 
 }
