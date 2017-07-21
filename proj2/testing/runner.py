@@ -175,6 +175,8 @@ def doExecute(cmnd, dir, timeout):
         full_cmnd = "{} {}".format(GITLET_COMMAND, cmnd)
         out = check_output(full_cmnd, shell=True, universal_newlines=True,
                            stdin=DEVNULL, stderr=STDOUT, timeout=timeout)
+        if superverbose:
+            print(out)
         return "OK", out
     except CalledProcessError as excp:
         return ("java gitlet.Main exited with code {}".format(excp.args[0]),
@@ -378,6 +380,7 @@ if __name__ == "__main__":
     keep = False
     lib_dir = None
     verbose = False
+    superverbose = False
     src_dir = 'src'
     gitlet_dir = join(dirname(abspath(getcwd())), "gitlet")
     output_tolerance = 3
@@ -386,7 +389,7 @@ if __name__ == "__main__":
         opts, files = \
             getopt(sys.argv[1:], '',
                    ['show=', 'keep', 'lib=', 'verbose', 'src=',
-                    'tolerance='])
+                    'tolerance=', 'superverbose'])
         for opt, val in opts:
             if opt == '--show':
                 show = int(val)
@@ -400,6 +403,8 @@ if __name__ == "__main__":
                 verbose = True
             elif opt == "--tolerance":
                 output_tolerance = int(val)
+            elif opt == "--superverbose":
+                superverbose = True
         if lib_dir is None:
             lib_dir = join(dirname(dirname(abspath(getcwd()))), "lib")
         else:
