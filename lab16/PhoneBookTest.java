@@ -14,7 +14,7 @@ public class PhoneBookTest extends TestCase {
 
 		myBook.addEntry(person1, num1);
 		PhoneNumber numReturned = myBook.getNumber(person1);
-		assertEquals("Stored Number Not Correct", num1, expected1);
+		assertEquals("Stored Number Not Correct", expected1, numReturned);
 	}
 
 	/*
@@ -31,8 +31,8 @@ public class PhoneBookTest extends TestCase {
 		myBook.addEntry(person1, num1);
 		myBook.addEntry(person1, num2);
 		PhoneNumber numReturned = myBook.getNumber(person1);
-		assertEquals("Replaced Number Not Found", numReturned, expected2);
-		assertNotSame("Old Phone number was found", numReturned, num1);
+		assertEquals("Replaced Number Not Found", expected2, numReturned);
+		assertNotSame("Old Phone number was found", num1, numReturned);
 	}
 
 	/*
@@ -91,7 +91,7 @@ public class PhoneBookTest extends TestCase {
 		num1.changeNumber("5105551235");
 		PhoneNumber num2 = myBook.getNumber(person1);
 		PhoneNumber expected = new PhoneNumber("5105551234");
-		assertEquals("Changed PhoneNumber not reflected in PhoneBook", num1,
+		assertEquals("Changed PhoneNumber not reflected in PhoneBook", expected,
 				num2);
 	}
 
