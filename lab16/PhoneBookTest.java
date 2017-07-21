@@ -90,7 +90,7 @@ public class PhoneBookTest extends TestCase {
 		myBook.addEntry(person1, num1);
 		num1.changeNumber("5105551235");
 		PhoneNumber num2 = myBook.getNumber(person1);
-		PhoneNumber expected = new PhoneNumber("5105551234");
+		PhoneNumber expected = new PhoneNumber("5105551235");
 		assertEquals("Changed PhoneNumber not reflected in PhoneBook", expected,
 				num2);
 	}
