@@ -13,11 +13,11 @@ public class Blob {
     private String shaCode;
 
     public Blob(String f) {
-        this.fileName=f;
+        this.fileName = f;
         this.file = new File(f);
-        this.filePath=System.getProperty("user.dir") + "/" + f;
-        this.content=Utils.readContents(file);
-        this.shaCode=Utils.sha1(content);
+        this.filePath = System.getProperty("user.dir") + "/" + f;
+        this.content = Utils.readContents(file);
+        this.shaCode = Utils.sha1(content);
     }
 
     public String getFileName() {
