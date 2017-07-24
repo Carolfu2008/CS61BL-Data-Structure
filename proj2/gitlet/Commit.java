@@ -2,20 +2,24 @@ package gitlet;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.HashSet;
+
 
 /**
  * Created by lifesaver on 16/07/2017.
  */
 public class Commit implements Serializable {
-    private String shaCode;
-    private String description;
-    private String timeStamp;
-    private String former;
-    private Map<String, String> fileID;
+    protected String shaCode;
+    protected String description;
+    protected String timeStamp;
+    protected String former;
+    protected HashMap<String, String> fileID;
+    protected String branch;
+    protected HashSet<String> removed;
 
     public Commit() {
         this.description = "initial commit";
@@ -23,35 +27,32 @@ public class Commit implements Serializable {
         this.fileID = null;
         this.former = null;
         this.shaCode = Utils.sha1(description, timeStamp);
+        this.branch = "master";
     }
 
-    public Commit(String regDes) {
+    public Commit(String regDes, HashMap<String, String> files) {
         this.description = regDes;
         this.timeStamp = curTime();
-        this.former = GitMethod.HEAD;
-        this.fileID = adding(trans(GitMethod.staged));
-        this.shaCode = Utils.sha1(description, former, strChanging(), timeStamp);
+        this.former = GitMethod.serialRead("head").getShaCode();
+        this.fileID = files;
+        String[] allStaff = strChanging(files, description, timeStamp, former);
+        this.shaCode = Utils.sha1(allStaff);
         GitMethod.HEAD = shaCode;
     }
 
-    public String[] strChanging() {
-        String[] strlst = new String[fileID.size() * 2];
-        Iterator<String> iter = this.fileID.keySet().iterator();
+    public String[] strChanging(HashMap file, String a, String b, String c) {
+        String[] strlst = new String[file.size() * 2 + 3];
+        Set<String> keys = file.keySet();
         int cnt = 0;
-        while (iter.hasNext()) {
-            strlst[cnt] = iter.next();
-            strlst[cnt + 1] = fileID.get(strlst[cnt]);
+        for (String key : keys) {
+            strlst[cnt] = key;
+            strlst[cnt + 1] = fileID.get(key);
             cnt += 2;
         }
+        strlst[cnt++] = a;
+        strlst[cnt++] = b;
+        strlst[cnt++] = c;
         return strlst;
-    }
-
-    public Blob[] trans(ArrayList<Blob> before) {
-        Blob[] after = new Blob[before.size()];
-        for (int i = 0; i <= after.length; i++) {
-            after[i] = before.get(i);
-        }
-        return after;
     }
 
     public String curTime() {
@@ -60,15 +61,17 @@ public class Commit implements Serializable {
         return t.format(date);
     }
 
-    public Map adding(Blob[] tracked) {
-        for (int i = 0; i < tracked.length; i++) {
-            fileID.put(tracked[i].getFileName(), tracked[i].getShaCode());
-        }
-        return fileID;
-    }
-
     public String getShaCode() {
         return shaCode;
+    }
+
+    public void setBranch(String branch) {
+        this.branch = branch;
+    }
+
+    public String getBranch() {
+
+        return branch;
     }
 
     public String getDescription() {
@@ -87,11 +90,11 @@ public class Commit implements Serializable {
         return fileID;
     }
 
-    public void printLog(Commit commit) {
+    public void printLog() {
         System.out.println("===");
-        System.out.println("Commit " + commit.shaCode);
-        System.out.println(timeStamp);
-        System.out.println(description);
+        System.out.println("Commit " + this.shaCode);
+        System.out.println(this.timeStamp);
+        System.out.println(this.description);
         System.out.println();
     }
 }

@@ -7,7 +7,10 @@ public class BinaryTree<T> {
 
     /* The root node of the tree. */
     protected TreeNode root;
+<<<<<<< HEAD
     protected int Index = 0;
+=======
+>>>>>>> 19dbd43ee14b8afedef73ce72e8c16923541b77a
 
     /** Constructs an empty binary tree. */
     public BinaryTree() {
@@ -91,7 +94,11 @@ public class BinaryTree<T> {
      *  @param  in   ArrayList of keys in inorder
      */
     public BinaryTree(ArrayList<T> pre,  ArrayList<T> in) {
+<<<<<<< HEAD
         root = listHelper(pre, in,0,in.size()-1);
+=======
+        root = listHelper(pre, in);
+>>>>>>> 19dbd43ee14b8afedef73ce72e8c16923541b77a
     }
     
     /** A helper method. 
@@ -99,6 +106,7 @@ public class BinaryTree<T> {
      *  @param  in   ArrayList of keys in inorder
      *  @return TreeNode with root, left, and right according to pre and in
      */
+<<<<<<< HEAD
     private TreeNode listHelper(ArrayList<T> pre,  ArrayList<T> in, int inStart, int inEnd) {
         if (inStart > inEnd) {
             return null;
@@ -124,6 +132,13 @@ public class BinaryTree<T> {
     }
 
 
+=======
+    private TreeNode listHelper(ArrayList<T> pre,  ArrayList<T> in) { 
+        //YOUR CODE HERE
+        return null;
+    }
+    
+>>>>>>> 19dbd43ee14b8afedef73ce72e8c16923541b77a
     /** Print the values in the tree in preorder: root value first,
       * then values in the left subtree (in preorder), then values
       * in the right subtree (in preorder). */

@@ -10,10 +10,6 @@ import java.io.File;
 
 public class Main {
 
-    public void check() {
-
-    }
-
     /**
      * Usage: java gitlet.Main ARGS, where ARGS contains
      * <COMMAND> <OPERAND> Not in an initialized gitlet directory.....
@@ -28,8 +24,6 @@ public class Main {
             case "init":
                 if (args.length == 1) {
                     GitMethod.init();
-                } else {
-                    System.out.println("Incorrect operands.");
                 }
                 break;
             case "add":
@@ -40,21 +34,62 @@ public class Main {
                 }
                 if (args.length == 2) {
                     GitMethod.add(args[1]);
-                } else {
-                    System.out.println("Incorrect operands.");
                 }
                 break;
             case "commit":
-                if (args.length == 1) {
+                if (args.length == 1 || args[1].trim().equals("")) {
                     System.out.println("Please enter a commit message.");
                     return;
+                } else if (args.length == 2) {
+                    GitMethod.commit(args[1]);
                 }
-                GitMethod.commit(args);
+                break;
+            case "rm":
+                if (args.length == 2) {
+                    GitMethod.rm(args[1]);
+                }
+                break;
+            case "log":
+                if (args.length == 1) {
+                    GitMethod.log();
+                }
+                break;
+            case "global-log":
+                if (args.length == 1) {
+                    GitMethod.glog();
+                }
+                break;
+            case "find":
+                if (args.length == 2) {
+                    GitMethod.find(args[1]);
+                } else {
+                    System.out.println("Incorrect operands.");
+                    return;
+                }
+                break;
+            case "status":
+                GitMethod.status();
+                break;
+            case "checkout":
+                GitMethod.checkout(args);
+                break;
+            case "branch":
+                GitMethod.branch(args[1]);
+                break;
+            case "rm-branch":
+                GitMethod.rmb(args[1]);
+                break;
+            case "reset":
+                GitMethod.reset(args[1]);
+                break;
+            case "merge":
+                GitMethod.merge(args[1]);
                 break;
             default:
                 System.out.println("No command with that name exists.");
                 return;
         }
+        GitMethod.checkAfterwards();
     }
 
 }
