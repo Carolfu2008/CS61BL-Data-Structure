@@ -195,6 +195,7 @@ public class SplayTree<K extends Comparable<K>, V> {
     public void put(K key, V value) {
         if (root == null) {
             root = new TreeNode<>(new Entry<>(key, value));
+            size++;
         } else {
             put(key, value, root);
         }
