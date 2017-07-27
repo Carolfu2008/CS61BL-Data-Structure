@@ -258,10 +258,10 @@ public class SplayTree<K extends Comparable<K>, V> {
     public void put(K key, V value) {
         if (root == null) {
             root = new TreeNode<>(new Entry<>(key, value));
+            size++;
         } else {
             put(key, value, root);
         }
-        size++;
     }
 
     /**
@@ -278,6 +278,7 @@ public class SplayTree<K extends Comparable<K>, V> {
             if (node.left == null) {
                 node.left = new TreeNode<>(new Entry<>(key, value), node);
                 splayNode(node.left);
+                size++;
             } else {
                 put(key, value, node.left);
             }
@@ -285,6 +286,7 @@ public class SplayTree<K extends Comparable<K>, V> {
             if (node.right == null) {
                 node.right = new TreeNode<>(new Entry<>(key, value), node);
                 splayNode(node.right);
+                size++;
             } else {
                 put(key, value, node.right);
             }
