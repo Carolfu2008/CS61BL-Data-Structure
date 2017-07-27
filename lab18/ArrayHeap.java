@@ -152,8 +152,8 @@ public class ArrayHeap<T> {
 		//YOUR CODE HERE
 	}
 
-	/* Returns the Node with the smallest priority value, and removes it from
-	 * the heap. Same as dequeue, or poll. */
+	/* Returns the Node with the highest priority, a.k.a smallest value, and removes it from
+  	 * the heap. Same as dequeue, or poll */
 	public Node removeMin() {
 		//YOUR CODE HERE
 	}
