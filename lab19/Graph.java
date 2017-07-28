@@ -59,7 +59,7 @@ public class Graph implements Iterable<Integer>{
 
     // Returns a list of all the neighboring  vertices 'u'
     // such that the edge (VERTEX, 'u') exists in this graph.
-    public List neighbors(int vertex) {
+    public List<Integer> neighbors(int vertex) {
         // your code here
         return null;
     }
