@@ -128,8 +128,8 @@ public class IntList {
 
     /**
      * Returns the result of sorting the values in this list using the insertion
-     * sort algorithm. This list is no longer usable after this operation; you
-     * have to use the returned list.
+     * sort algorithm. Only the list returned will be checked for the correct value.
+     * The original list can be modified if you choose to.
      */
     public IntList insertionSort() {
         IntListNode soFar = null;
@@ -141,7 +141,7 @@ public class IntList {
 
     /**
      * Inserts the node p into the list headed by head so that the node values
-     * are in increasing order.
+     * are in increasing order. You are allowed to create new IntListNodes.
      */
     private IntListNode insert(IntListNode p, IntListNode head) {
         // TODO your code here!
