@@ -24,8 +24,14 @@ public class IntList {
      * Constructs an IntList with one node. Head and tail are the same.
      */
     public IntList(IntListNode head) {
-        this.head = this.tail = head;
-        this.size = 1;
+        this.head = head;
+        size = 1;
+        this.tail = head;
+        for (IntListNode i = head.next; i != null; i = i.next) {
+            size++;
+            this.tail = i;
+        }
+        this.size = size;
     }
 
     /**
