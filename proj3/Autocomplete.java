@@ -4,14 +4,30 @@
  * @author
  */
 public class Autocomplete {
+
+    protected TernaryTrie tt;
+
     /**
      * Initializes required data structures from parallel arrays.
      *
-     * @param terms Array of terms.
+     * @param terms   Array of terms.
      * @param weights Array of weights.
      */
     public Autocomplete(String[] terms, double[] weights) {
-        /* YOUR CODE HERE. */
+        if (terms.length != weights.length) {
+            throw new IllegalArgumentException("The length of "
+                    + "the terms and weights arrays are different.");
+        }
+        tt = new TernaryTrie();
+        for (int i = 0; i < terms.length; i++) {
+            if (weights[i] < 0) {
+                throw new IllegalArgumentException("There are negative weights.");
+            }
+            if (tt.find(terms[i])) {
+                throw new IllegalArgumentException("There are duplicate input terms.");
+            }
+            tt.insert(terms[i], weights[i]);
+        }
     }
 
     /**
@@ -21,18 +37,20 @@ public class Autocomplete {
      * @return
      */
     public double weightOf(String term) {
-        /* YOUR CODE HERE. */
-        return 0.0;
+        if (!tt.find(term)) {
+            throw new IllegalArgumentException("The term doesn't exist.");
+        }
+        return tt.checkWeightOf(term);
     }
 
     /**
      * Return the top match for given prefix, or null if there is no matching term.
+     *
      * @param prefix Input prefix to match against.
      * @return Best (highest weight) matching string in the dictionary.
      */
     public String topMatch(String prefix) {
-        /* YOUR CODE HERE. */
-        return null;
+        return tt.topMatches(prefix, 1).get(0);
     }
 
     /**
@@ -44,8 +62,11 @@ public class Autocomplete {
      * @return
      */
     public Iterable<String> topMatches(String prefix, int k) {
-        /* YOUR CODE HERE. */
-        return null;
+        if (k <= 0) {
+            throw new IllegalArgumentException("Trying to find "
+                    + "the k top matches for non-positive k.");
+        }
+        return tt.topMatches(prefix, k);
     }
 
     /**

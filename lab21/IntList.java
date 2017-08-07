@@ -1,5 +1,6 @@
 /**
  * A doubly-linked list of integers supporting various sorting algorithms.
+ *
  * @author You
  */
 public class IntList {
@@ -24,14 +25,8 @@ public class IntList {
      * Constructs an IntList with one node. Head and tail are the same.
      */
     public IntList(IntListNode head) {
-        this.head = head;
-        size = 1;
-        this.tail = head;
-        for (IntListNode i = head.next; i != null; i = i.next) {
-            size++;
-            this.tail = i;
-        }
-        this.size = size;
+        this.head = this.tail = head;
+        this.size = 1;
     }
 
     /**
@@ -151,7 +146,33 @@ public class IntList {
      */
     private IntListNode insert(IntListNode p, IntListNode head) {
         // TODO your code here!
-        return null;
+        if (head == null) {
+            return p;
+        } else {
+            IntListNode position = p;
+            for (IntListNode current = p; current.prev != null && current.prev.item > p.item; current = current.prev) {
+                position = current.prev;
+            }
+            if (position == p) {
+                return head;
+            }
+            p.prev.next = p.next;
+            if (p.next != null) {
+                p.next.prev = p.prev;
+            }
+            if (position.prev == null) {
+                position.prev = p;
+                p.next = position;
+                p.prev = null;
+                return p;
+            } else {
+                p.next = position;
+                p.prev = position.prev;
+                p.next.prev = p;
+                p.prev.next = p;
+                return head;
+            }
+        }
     }
 
     /**
@@ -189,7 +210,20 @@ public class IntList {
         IntList largeElements = new IntList();
         int divider = head.item;
         // TODO your code here!
-        return null;
+        IntListNode current = head.next;
+        while (current != null) {
+            if (current.item < divider) {
+                smallElements.addToEnd(current.item);
+            } else {
+                largeElements.addToEnd(current.item);
+            }
+            current = current.next;
+        }
+        IntList result = new IntList();
+        result.append(smallElements.quicksort());
+        result.addToEnd(divider);
+        result.append(largeElements.quicksort());
+        return result;
     }
 
     /**
@@ -203,7 +237,16 @@ public class IntList {
         IntList oneHalf = new IntList();
         IntList otherHalf = new IntList();
         // TODO your code here!
-        return null;
+        IntListNode c = head;
+        for (int i = 0; i < size / 2; i++) {
+            oneHalf.addToEnd(c.item);
+            c = c.next;
+        }
+        while (c != null) {
+            otherHalf.addToEnd(c.item);
+            c = c.next;
+        }
+        return merge(oneHalf.mergeSort().head, otherHalf.mergeSort().head);
     }
 
     /**
