@@ -1,4 +1,7 @@
 import java.util.Arrays;
+import java.util.HashMap;
+
+import static java.lang.Math.pow;
 
 public class DistributionSorts {
 
@@ -7,28 +10,56 @@ public class DistributionSorts {
      */
     public static void countingSort(int[] arr) {
         // TODO your code here!
+        int[] myArr = new int[10];
+        for (int i : arr) {
+            myArr[i]++;
+        }
+        int base = 0;
+        for (int i = 0; i < myArr.length; i++) {
+            for (int j = 0; j < myArr[i]; j++) {
+                arr[base] = i;
+                base++;
+            }
+        }
     }
 
     /**
      * Sorts the given array using LSD radix sort.
      */
     public static void LSDRadixSort(int[] arr) {
-      int maxDigit = mostDigitsIn(arr);
-      for (int d = 0; d < maxDigit; d++) {
-        countingSortOnDigit(arr, d);
-      }
+        int maxDigit = mostDigitsIn(arr);
+        for (int d = 0; d < maxDigit; d++) {
+            countingSortOnDigit(arr, d);
+        }
     }
 
     /**
      * A helper method for radix sort. Modifies arr to be sorted according to
      * digit. When digit is equal to 0, sort the numbers by the rightmost digit of each number.
-     *
+     * <p>
      * You will need to create an auxiliary array in order to put elements in the
      * correct spot before transferring them back into arr.
-     *
-     */ 
+     */
     private static void countingSortOnDigit(int[] arr, int digit) {
         // TODO your code here!
+        int output[] = new int[arr.length]; // output array
+        int i;
+        int count[] = new int[10];
+        Arrays.fill(count, 0);
+
+        for (i = 0; i < arr.length; i++)
+            count[(arr[i] / (int) Math.pow(10, digit)) % 10]++;
+
+        for (i = 1; i < 10; i++)
+            count[i] += count[i - 1];
+
+        for (i = arr.length - 1; i >= 0; i--) {
+            output[count[(arr[i] / (int) Math.pow(10, digit)) % 10] - 1] = arr[i];
+            count[(arr[i] / (int) Math.pow(10, digit)) % 10]--;
+        }
+        
+        for (i = 0; i < arr.length; i++)
+            arr[i] = output[i];
     }
 
     /**
